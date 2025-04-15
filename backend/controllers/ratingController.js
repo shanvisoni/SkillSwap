@@ -1,37 +1,50 @@
+
 import Rating from '../models/Rating.js';
-import { sendNotification } from '../utils/sendNotification.js';
+import Message from '../models/Message.js';
 
 export const submitRating = async (req, res) => {
+  const { toUser, stars, comment } = req.body;
+  const fromUser = req.user._id;
+
   try {
-    const { user, rating, review } = req.body;
+    const existing = await Rating.findOne({ fromUser, toUser });
+    if (existing) return res.status(400).json({ message: "You have already rated this user." });
 
-    if (!user || !rating) {
-      return res.status(400).json({ message: 'User ID and rating required' });
-    }
+    const rating = new Rating({ fromUser, toUser, stars, comment });
+    await rating.save();
 
-    const newRating = await Rating.create({
-      rater: req.user._id,
-      user,
-      rating,
-      review,
+    res.status(201).json({ message: "Rating submitted!", rating });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const checkRatingStatus = async (req, res) => {
+  const { to } = req.query; // the user being rated
+  const from = req.user._id;
+
+  try {
+    const hasRated = await Rating.exists({ fromUser: from, toUser: to });
+    const hasChatHistory = await Message.exists({
+      $or: [
+        { sender: from, receiver: to },
+        { sender: to, receiver: from }
+      ]
     });
 
-    // Send a notification to the rated user
-    sendNotification(user, `You have received a new rating of ${rating} stars!`);
-
-    res.status(201).json(newRating);
+    res.json({ hasRated, hasChatHistory });
   } catch (error) {
-    res.status(500).json({ message: 'Rating submission failed' });
+    res.status(500).json({ message: error.message });
   }
 };
 
 export const getUserRatings = async (req, res) => {
+  const userId = req.params.userId;
   try {
-    const { userId } = req.params;
-
-    const ratings = await Rating.find({ user: userId }).populate('rater', 'name');
-    res.json(ratings);
+    const ratings = await Rating.find({ toUser: userId });
+    const average = ratings.reduce((sum, r) => sum + r.stars, 0) / (ratings.length || 1);
+    res.json({ average: average.toFixed(1), count: ratings.length, ratings });
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching ratings' });
+    res.status(500).json({ message: error.message });
   }
 };

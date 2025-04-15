@@ -52,7 +52,7 @@ useEffect(() => {
 const markMessagesAsRead = async (chatId) => {
   try {
     const token = localStorage.getItem("token");
-    await fetch(`http://localhost:5000/api/chat/read/${chatId}`, {
+    await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chat/read/${chatId}`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -69,7 +69,7 @@ const markMessagesAsRead = async (chatId) => {
   return (
     <nav className="bg-gray-900 text-white p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold">SkillMatch</Link>
+        <Link to="/" className="text-2xl font-bold">skillsExchange</Link>
 
         <ul className="hidden md:flex space-x-6">
           <li><Link to="/" className="hover:text-blue-400">Home</Link></li>
