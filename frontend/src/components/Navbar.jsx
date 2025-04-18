@@ -69,11 +69,11 @@ const markMessagesAsRead = async (chatId) => {
   return (
     <nav className="bg-gray-900 text-white p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold">skillsExchange</Link>
+        <Link to="/" className="text-2xl font-bold">SkillSwap</Link>
 
         <ul className="hidden md:flex space-x-6">
           <li><Link to="/" className="hover:text-blue-400">Home</Link></li>
-          <li><Link to="/dashboard" className="hover:text-blue-400">Dashboard</Link></li>
+          <li><Link to="/dashboard" className="hover:text-bclue-400">Dashboard</Link></li>
           <li><Link to="/profile" className="hover:text-blue-400">Profile</Link></li>
           <li className="relative">
           <Link to="/chats" className="hover:text-blue-400" onClick={() => markMessagesAsRead(user?._id)}>

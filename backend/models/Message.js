@@ -7,10 +7,9 @@ const messageSchema = new mongoose.Schema(
     receiver: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     text: { type: String, required: true },
     read: { type: Boolean, default: false },
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
   },
   { timestamps: true } // ✅ Adds createdAt & updatedAt automatically
 );
-
 
 export default mongoose.model('Message', messageSchema);

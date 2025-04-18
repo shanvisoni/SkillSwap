@@ -1,50 +1,39 @@
-
 import Rating from '../models/Rating.js';
-import Message from '../models/Message.js';
 
-export const submitRating = async (req, res) => {
-  const { toUser, stars, comment } = req.body;
-  const fromUser = req.user._id;
-
+export const giveRating = async (req, res) => {
+  const { fromUser, toUser, rating } = req.body;
   try {
     const existing = await Rating.findOne({ fromUser, toUser });
-    if (existing) return res.status(400).json({ message: "You have already rated this user." });
+    if (existing) return res.status(400).json({ message: 'You have already rated this user.' });
 
-    const rating = new Rating({ fromUser, toUser, stars, comment });
-    await rating.save();
-
-    res.status(201).json({ message: "Rating submitted!", rating });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+    const newRating = new Rating({ fromUser, toUser, rating });
+    await newRating.save();
+    res.status(201).json(newRating);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 
-export const checkRatingStatus = async (req, res) => {
-  const { to } = req.query; // the user being rated
-  const from = req.user._id;
-
-  try {
-    const hasRated = await Rating.exists({ fromUser: from, toUser: to });
-    const hasChatHistory = await Message.exists({
-      $or: [
-        { sender: from, receiver: to },
-        { sender: to, receiver: from }
-      ]
-    });
-
-    res.json({ hasRated, hasChatHistory });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-export const getUserRatings = async (req, res) => {
-  const userId = req.params.userId;
+export const getUserAverageRating = async (req, res) => {
+  const { userId } = req.params;
   try {
     const ratings = await Rating.find({ toUser: userId });
-    const average = ratings.reduce((sum, r) => sum + r.stars, 0) / (ratings.length || 1);
-    res.json({ average: average.toFixed(1), count: ratings.length, ratings });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+    if (ratings.length === 0) return res.json({ avgRating: 0 });
+
+    const sum = ratings.reduce((acc, r) => acc + r.rating, 0);
+    const avg = sum / ratings.length;
+    res.json({ avgRating: avg.toFixed(1), total: ratings.length });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const checkIfRated = async (req, res) => {
+  const { fromUser, toUser } = req.query;
+  try {
+    const rating = await Rating.findOne({ fromUser, toUser });
+    res.json({ alreadyRated: !!rating });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };

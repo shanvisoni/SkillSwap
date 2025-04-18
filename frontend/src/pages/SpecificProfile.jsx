@@ -1,21 +1,17 @@
 import { useEffect, useState } from "react";
-import { useParams,useNavigate } from "react-router-dom";
-import Chat from "../components/Chat"; // Import Chat Component
+import { useParams, useNavigate } from "react-router-dom";
 
-// const API_URL = "http://localhost:5000/api/users";
 const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api/users`;
 
 const SpecificProfile = () => {
   const { userId } = useParams();
-  console.log("Chat opened for user:", userId);
   const navigate = useNavigate();
 
   const [user, setUser] = useState(null);
-  const [showChat, setShowChat] = useState(false); // State to toggle chat
+  const [ratingInfo, setRatingInfo] = useState({ avgRating: 0, total: 0 });
 
-  
   const handleChatClick = () => {
-    navigate(`/chats/${userId}`, { state: { receiverId: userId } }); // ✅ Navigate to correct chat URL
+    navigate(`/chats/${userId}`); // Navigate to chat page
   };
 
   useEffect(() => {
@@ -29,7 +25,26 @@ const SpecificProfile = () => {
       }
     };
 
+    const fetchUserRating = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/api/ratings/average/${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const ratingData = await res.json();
+        setRatingInfo(ratingData);
+      } catch (error) {
+        console.error("Error fetching rating:", error);
+      }
+    };
+
     fetchUserProfile();
+    fetchUserRating();
   }, [userId]);
 
   if (!user)
@@ -82,24 +97,21 @@ const SpecificProfile = () => {
 
           <p className="font-semibold">⭐ Ratings:</p>
           <p>
-            {user.ratings.length > 0
-              ? `⭐ ${user.ratings.length} Ratings`
+            {ratingInfo.total > 0
+              ? `⭐ ${ratingInfo.total} Ratings (Avg: ${ratingInfo.avgRating}/5)`
               : "No ratings yet"}
           </p>
         </div>
 
         {/* Chat Button */}
         <div className="flex justify-center mt-6">
-           <button
+          <button
             className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-6 py-3 rounded-full text-lg font-bold shadow-lg hover:shadow-2xl hover:scale-105 transition-all"
             onClick={handleChatClick}
           >
             💬 Chat Now
           </button>
         </div>
-
-        {/* Chat Component (Conditional Rendering) */}
-        {showChat && <Chat userId={userId} />}
       </div>
     </div>
   );

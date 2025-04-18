@@ -52,7 +52,7 @@ useEffect(() => {
     let newSocket;
   
     const connectSocket = () => {
-      newSocket = io('http://localhost:5000', {
+      newSocket = io(`${import.meta.env.VITE_BACKEND_URL}`, {
         query: { userId: user._id, token },
         transports: ['websocket'],
         reconnection: false, // We'll handle manually
