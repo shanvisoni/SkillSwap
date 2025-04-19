@@ -34,9 +34,23 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-[#121212] text-white p-6 flex flex-col items-center">
-      <h1 className="text-4xl font-bold text-center text-[#00FFF5] drop-shadow-lg">
-        Welcome, {user?.name}!
-      </h1>
+
+
+<h1 className="text-4xl font-bold text-center">
+  <span className="bg-gradient-to-r from-indigo-400 to-purple-500 text-transparent bg-clip-text">
+    Welcome, 
+  </span>
+  <span className="bg-gradient-to-r from-pink-400 to-rose-500 text-transparent bg-clip-text">
+    {user?.name}!
+  </span>
+</h1>
+
+<div className="relative inline-block">
+
+  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 opacity-75 
+                  animate-[pulse_3s_ease-in-out_infinite] blur-sm"></div>
+</div>
+
 
       <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
         {/* Matched Users Section */}
@@ -116,14 +130,16 @@ const Dashboard = () => {
 
         {/* Profile Section with Dynamic Rating */}
         <div className="bg-[#1E1E1E] p-6 rounded-lg shadow-xl border border-[#00ADB5] flex flex-col items-center">
-          <h2 className="text-2xl font-semibold text-[#00FFF5]">My Profile</h2>
+        <h2 className="text-2xl font-semibold bg-gradient-to-r from-cyan-400 to-teal-500 text-transparent bg-clip-text">
+  👤 My Profile
+</h2>
 
-          <Link
+          {/* <Link
             to="/profile"
             className="mt-6 px-6 py-3 bg-[#00ADB5] text-[#222831] font-semibold rounded-lg hover:bg-[#00FFF5] transition duration-300 shadow-lg"
           >
             View My Profile
-          </Link>
+          </Link> */}
 
           <div className="mt-10 flex flex-col items-center">
             <div className="relative w-16 h-16 flex justify-center items-center">
@@ -139,16 +155,22 @@ const Dashboard = () => {
                 <div className="mt-4 text-xl font-bold text-[#00FFF5] bg-[#2A2A2A] px-4 py-2 rounded-full shadow-lg border border-[#00ADB5]">
                   {ratingInfo.avgRating} / 5 Rating
                 </div>
-                <p className="text-sm text-gray-400 mt-1 italic">
+                <p className="text-sm text-gray-400 mt-1 italic mb-10">
                   Based on {ratingInfo.total} user rating
                   {ratingInfo.total > 1 ? "s" : ""}
                 </p>
               </>
             ) : (
-              <div className="mt-4 text-gray-400 italic">
+              <div className="mt-4 text-gray-400 italic mb-10">
                 No ratings yet.
               </div>
             )}
+              <Link
+    to="/profile"
+    className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-semibold rounded-full hover:from-teal-400 hover:to-cyan-500 transition-all duration-300 shadow-lg hover:shadow-cyan-500/30 gap-2"
+  >
+    <span>👤</span> View My Profile
+  </Link>
           </div>
         </div>
       </div>

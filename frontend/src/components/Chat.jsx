@@ -142,7 +142,8 @@ const Chat = ({ receiverId: propReceiverId }) => {
       )}
 
       <div className="flex flex-col h-[600px] w-full max-w-lg mx-auto bg-[#86003C] text-white p-4 shadow-lg rounded-lg">
-        <h2 className="text-2xl font-bold text-center mb-2 text-[#FF8BA0]">
+        <h2 className="text-2xl font-bold text-center mb-2 text-cyan-300">
+        <span className="text-indigo-300">👥</span>
           {receiverName ? `Chat with ${receiverName}` : "Chat"}
         </h2>
 

@@ -37,7 +37,7 @@ const Login = () => {
   return (
     <div
       className="flex justify-center items-center h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url('/LoginPageImg.jpeg')" }}
+      style={{ backgroundImage: "url('/RegisterPage.jpg')" }}
     >
       <div className="bg-gray-900 bg-opacity-90 p-8 rounded-xl shadow-xl w-96 border border-gray-700">
         <h2 className="text-3xl font-semibold text-center text-cyan-400 mb-4">Login</h2>

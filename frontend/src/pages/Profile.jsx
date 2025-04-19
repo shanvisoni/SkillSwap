@@ -110,7 +110,23 @@ const Profile = () => {
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-6">
       <div className="max-w-4xl w-full bg-gray-900 text-white p-6 rounded-lg shadow-lg">
-        <h2 className="text-3xl font-bold mb-6 text-center text-gray-100">Profile</h2>
+        {/* <h2 className="text-3xl font-bold mb-6 text-center text-gray-100">Profile</h2> */}
+
+
+
+
+
+        <h2 className="text-3xl font-bold mb-6 text-center">
+  <span className="text-purple-400">👑</span> <span className="bg-gradient-to-r from-cyan-300 to-blue-400 text-transparent bg-clip-text">Profile</span>
+</h2>
+
+
+{/* <h2 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-cyan-300 to-blue-400 text-transparent bg-clip-text hover:animate-[pulse_2s_ease-in-out_infinite]">
+  👤 Profile
+</h2> */}
+
+
+
 
         {/* Name & Email */}
         <div className="mb-4">
@@ -175,7 +191,7 @@ const Profile = () => {
               {profile[field].map((item, idx) => (
                 <span
                   key={idx}
-                  className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm flex items-center"
+                  className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white  px-3 py-1 rounded-full text-sm flex items-center"
                 >
                   {item}
                   {isEditing && (

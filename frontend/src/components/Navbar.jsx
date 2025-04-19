@@ -101,7 +101,12 @@ const markMessagesAsRead = async (chatId) => {
         <div className="hidden md:flex space-x-4">
           {user ? (
             <>
-              <span className="font-semibold">{user.name}</span>
+<span className="font-semibold">
+  <span className="text-purple-400">👋</span>{" "}
+  <span className="bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">
+    {user.name}
+  </span>
+</span>
               <button 
                 onClick={logout} 
                 className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg">

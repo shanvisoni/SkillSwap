@@ -117,7 +117,11 @@ const handleNewMessage = async (message) => {
   return (
     <div className="bg-black min-h-screen p-6 flex justify-center">
       <div className="w-full max-w-md bg-gradient-to-br from-[#86003C] via-[#E41F7B] to-[#FF8BA0] text-white p-6 rounded-2xl shadow-xl">
-        <h2 className="text-3xl font-bold text-center mb-6 animate-fade-in">Chat Users</h2>
+        {/* <h2 className="text-3xl font-bold text-center mb-6 animate-fade-in">Chat Users</h2> */}
+
+        <h2 className="text-3xl font-bold text-center mb-6">
+  <span className="text-indigo-300">💬</span> <span className="text-cyan-300">Chat Users</span>
+</h2>
 
         {/* <div className="space-y-4"> */}
        {/*---------------changes for scroll bar---------------*/}
