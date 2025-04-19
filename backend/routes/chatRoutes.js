@@ -1,6 +1,4 @@
 
-
-
 import express from "express";
 import { saveMessage, getChatHistory,getChatUsers} from "../controllers/chatController.js";
 import protect from "../middleware/authMiddleware.js";
@@ -73,9 +71,9 @@ router.get('/unread', protect, async (req, res) => {
     }
 });
 
-  
-  // Mark messages as read
-  router.patch('/read/:senderId', protect, async (req, res) => {
+
+// Mark messages as read
+router.patch('/read/:senderId', protect, async (req, res) => {
     try {
       await Message.updateMany(
         {

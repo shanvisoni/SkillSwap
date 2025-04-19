@@ -76,3 +76,5 @@ export const markMessagesAsRead = async (senderId) => {
     console.error("❌ Failed to mark messages as read:", error);
   }
 };
+
+
