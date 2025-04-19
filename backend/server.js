@@ -46,7 +46,7 @@ process.on('uncaughtException', (error) => {
 app.use(express.json()); // Body parser for JSON data
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173", // Allow only this origin
+    origin: process.env.CLIENT_URL || "https://skill-swap-h6dhf0ooe-shanvis-projects-9dec7532.vercel.app", // Allow only this origin
     credentials: true, // Allow cookies and authentication headers
   })
 );
