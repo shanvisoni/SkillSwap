@@ -9,14 +9,13 @@ const Footer = () => {
           <li><Link to="/" className="hover:text-blue-400">Home</Link></li>
           <li><Link to="/dashboard" className="hover:text-blue-400">Dashboard</Link></li>
           <li><Link to="/profile" className="hover:text-blue-400">Profile</Link></li>
-          <li><Link to="/search" className="hover:text-blue-400">Search</Link></li>
-          <li><Link to="/chat" className="hover:text-blue-400">Chat</Link></li>
+          <li><Link to="/chats" className="hover:text-blue-400">Chat</Link></li>
           <li><Link to="/progress" className="hover:text-blue-400">Progress</Link></li>
         </ul>
 
         {/* Copyright Text */}
         <p className="text-sm text-gray-400">
-          © {new Date().getFullYear()} SkillMatch. All rights reserved.
+          © {new Date().getFullYear()} SkillSwap All rights reserved.
         </p>
 
         {/* Social Media Links (Optional) */}

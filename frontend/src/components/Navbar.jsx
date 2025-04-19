@@ -69,7 +69,16 @@ const markMessagesAsRead = async (chatId) => {
   return (
     <nav className="bg-gray-900 text-white p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold">SkillSwap</Link>
+        {/* <Link to="/" className="text-2xl font-bold">SkillSwap</Link> */}
+        <Link to="/" className="flex items-center space-x-2">
+  <span className="text-3xl animate-pulse drop-shadow-lg">🤝</span>
+  <span className="text-3xl font-extrabold bg-gradient-to-r from-pink-500 to-white bg-clip-text text-transparent drop-shadow-md">
+    Skill<span className="italic text-white">Swap</span>
+  </span>
+</Link>
+
+
+
 
         <ul className="hidden md:flex space-x-6">
           <li><Link to="/" className="hover:text-blue-400">Home</Link></li>

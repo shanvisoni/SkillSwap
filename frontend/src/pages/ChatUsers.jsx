@@ -3,7 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useChat } from "../context/ChatContext";
 import { getUnreadMessages, markMessagesAsRead } from "../services/chatService";
-
+import '../App.css'
 const ChatUsers = () => {
   const { token, user: currentUser } = useContext(AuthContext);
   const { socket, isSocketReady } = useChat();
@@ -119,14 +119,16 @@ const handleNewMessage = async (message) => {
       <div className="w-full max-w-md bg-gradient-to-br from-[#86003C] via-[#E41F7B] to-[#FF8BA0] text-white p-6 rounded-2xl shadow-xl">
         <h2 className="text-3xl font-bold text-center mb-6 animate-fade-in">Chat Users</h2>
 
-        <div className="space-y-4">
+        {/* <div className="space-y-4"> */}
+       {/*---------------changes for scroll bar---------------*/}
+        <div className="space-y-4 max-h-[500px] overflow-y-auto overflow-x-hidden hidden-scrollbar">
           {chatUsers.length > 0 ? (
             chatUsers.map((user) => (
               <div
                 key={user._id}
                 onClick={() => handleUserClick(user._id)}
                 className={`p-4 rounded-xl shadow-lg cursor-pointer 
-                  transition-transform duration-300 ease-in-out flex items-center gap-3 
+                  transition-transform duration-300 ease-in-out flex items-center gap-3                     overflow-hidden truncate
                   border ${user._id === activeChatId ? "border-white bg-[#E41F7B]" : 
                   user.unreadMessages > 0 ? "bg-yellow-400 border-yellow-600 animate-bounce" : 
                   "bg-[#86003C] border-[#FF8BA0] hover:bg-[#E41F7B] hover:scale-105"}`}

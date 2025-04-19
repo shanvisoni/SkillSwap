@@ -5,10 +5,23 @@ import { Link } from "react-router-dom";
 import userService from "../services/userService";
 import { debounce } from "lodash";
 
+
 const Home = () => {
   const [skills, setSkills] = useState([]);
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+
+
+  //-changes for bulb brain icon -----------
+  const [isBulb, setIsBulb] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsBulb(prev => !prev);
+    }, 5000); // Switch every 30 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const fetchSkills = async () => {
@@ -52,12 +65,47 @@ const Home = () => {
         {/* <Link to="/search" className="mt-4 inline-block bg-cyan-500 text-white px-6 py-2 rounded-lg font-semibold shadow-md hover:bg-cyan-400">
           Find Skills
         </Link> */}
+
+
+
+<div className="mt-10 flex justify-center">
+      {isBulb ? (
+        // 💡 Bulb Icon
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-16 w-16 text-yellow-400 animate-bounce drop-shadow-[0_0_20px_rgba(250,204,21,0.9)]"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 2a7 7 0 00-7 7c0 2.25 1.25 4.25 3 5.5v1.5a1.5 1.5 0 001.5 1.5h5a1.5 1.5 0 001.5-1.5v-1.5c1.75-1.25 3-3.25 3-5.5a7 7 0 00-7-7z"
+          />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9 21h6"
+          />
+        </svg>
+      ) : (
+        // 🧠 Brain Emoji
+        <div className="text-6xl animate-bounce drop-shadow-[0_0_20px_rgba(192,132,252,0.9)] text-purple-400">
+          🧠
+        </div>
+      )}
+    </div> 
+
+
+
       </div>
 
       <div className="w-full max-w-3xl mt-8 px-4">
         <input
           type="text"
-          placeholder="Search by location, skills, teaching or learning..."
+          placeholder="Search by Location, Profession, Teaching skills or Learning skills....."
           className="w-full p-3 border border-gray-600 rounded-lg shadow-sm bg-gray-800 text-white focus:ring focus:ring-cyan-400"
           value={query}
           onChange={handleSearch}

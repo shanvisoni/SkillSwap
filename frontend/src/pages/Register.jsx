@@ -1,5 +1,3 @@
-
-
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -27,16 +25,19 @@ const Register = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 className="text-2xl font-semibold mb-4 text-center">Register</h2>
-        {error && <p className="text-red-500 text-sm">{error}</p>}
-        <form onSubmit={handleSubmit}>
+    <div
+      className="h-screen w-full flex items-center justify-center bg-no-repeat bg-cover bg-center"
+      style={{ backgroundImage: "url('/RegisterPage.jpg')" }}
+    >
+      <div className="backdrop-blur-md bg-black/60 rounded-2xl p-8 w-[380px] shadow-2xl">
+        <h2 className="text-3xl font-bold text-white text-center mb-6">Register</h2>
+        {error && <p className="text-red-400 text-sm mb-4 text-center">{error}</p>}
+        <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
             name="name"
-            placeholder="Name"
-            className="w-full p-2 mb-3 border rounded"
+            placeholder="Your Name"
+            className="w-full p-3 rounded-lg bg-zinc-800 text-white placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
             value={formData.name}
             onChange={handleChange}
             required
@@ -45,7 +46,7 @@ const Register = () => {
             type="email"
             name="email"
             placeholder="Email"
-            className="w-full p-2 mb-3 border rounded"
+            className="w-full p-3 rounded-lg bg-zinc-800 text-white placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
             value={formData.email}
             onChange={handleChange}
             required
@@ -54,17 +55,20 @@ const Register = () => {
             type="password"
             name="password"
             placeholder="Password"
-            className="w-full p-2 mb-3 border rounded"
+            className="w-full p-3 rounded-lg bg-zinc-800 text-white placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
             value={formData.password}
             onChange={handleChange}
             required
           />
-          <button type="submit" className="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600">
+          <button
+            type="submit"
+            className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+          >
             Register
           </button>
         </form>
-        <p className="text-sm mt-3 text-center">
-          Already have an account? <a href="/login" className="text-blue-600">Login</a>
+        <p className="text-sm text-gray-300 mt-4 text-center">
+          Already have an account? <a href="/login" className="text-purple-400 hover:underline">Login</a>
         </p>
       </div>
     </div>
