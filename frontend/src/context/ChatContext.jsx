@@ -10,7 +10,7 @@ export const ChatProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [messages, setMessages] = useState([]);
   const [selectedChat, setSelectedChat] = useState(null);
-  const [isSocketReady, setIsSocketReady] = useState(false); // Add this line
+  const [isSocketReady, setIsSocketReady] = useState(false); 
   const selectedChatRef = useRef(null);
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
@@ -67,16 +67,23 @@ export const ChatProvider = ({ children }) => {
     };
   }, [token, userId]);
 
+
   const loadChatHistory = async (chatUserId) => {
     try {
-      const chatData = await fetchChatHistory(token, chatUserId);
-      setMessages(chatData);
+      const { messages, totalMessages } = await fetchChatHistory(token, chatUserId);
+      setMessages(messages);
       setSelectedChat(chatUserId);
+      console.log("Loaded messages:", totalMessages);
+      return totalMessages; // ✅ Return the count for rating check
     } catch (error) {
       console.error("Failed to load chat history:", error);
       setMessages([]);
+      return 0; // Default value if something fails
     }
   };
+
+  
+
 
   return (
     <ChatContext.Provider value={{ 

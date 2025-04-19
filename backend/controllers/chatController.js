@@ -24,7 +24,16 @@ export const getChatHistory = async (req, res) => {
       .populate("sender receiver", "name email") // Populate name & email for better frontend display
       .sort({ createdAt: 1 }); // Sort by oldest first
 
-    res.status(200).json(messages);
+    // res.status(200).json(messages);
+
+    
+
+    //------updation for rating count---------
+    res.status(200).json({ messages, totalMessages: messages.length });
+
+
+
+
   } catch (error) {
     console.error("❌ Error fetching chat history:", error);
     res.status(500).json({ message: "Error fetching chat history", error });

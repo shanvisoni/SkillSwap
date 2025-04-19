@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useContext, useRef } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useParams } from "react-router-dom";
@@ -29,10 +28,15 @@ const Chat = ({ receiverId: propReceiverId }) => {
     const loadChat = async () => {
       setIsLoading(true);
       try {
-        await loadChatHistory(receiverId);
+        const totalMessages = await loadChatHistory(receiverId);
         await fetchReceiverName();
         await markMessagesAsRead(receiverId);
-        await checkRating();
+        if (totalMessages >= 10) {
+          await checkRating();
+        } else {
+          setShowPopup(false); // Don't show popup
+        }
+  
       } catch (error) {
         console.error("Error loading chat:", error);
       } finally {
