@@ -115,7 +115,7 @@ const userSockets = {}; // { userId: [socketId1, socketId2] }
 const setupSocket = (server) => {
   const io = new Server(server, {
     cors: { 
-      origin: process.env.CLIENT_URL || "https://skill-swap-h6dhf0ooe-shanvis-projects-9dec7532.vercel.app",
+      origin: process.env.CLIENT_URL || "https://skill-swap-livid.vercel.app",
       methods: ["GET", "POST"]
     },
   });
