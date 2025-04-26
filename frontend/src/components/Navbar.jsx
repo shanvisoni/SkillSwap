@@ -95,7 +95,7 @@ const markMessagesAsRead = async (chatId) => {
               </span>
             )}
           </li>
-          <li><Link to="/progress" className="hover:text-blue-400">Progress</Link></li>
+          {/* <li><Link to="/progress" className="hover:text-blue-400">Progress</Link></li> */}
         </ul>
 
         <div className="hidden md:flex space-x-4">
@@ -142,7 +142,7 @@ const markMessagesAsRead = async (chatId) => {
               </span>
             )}
           </li>
-          <li><Link to="/progress" onClick={() => setMenuOpen(false)}>Progress</Link></li>
+          {/* <li><Link to="/progress" onClick={() => setMenuOpen(false)}>Progress</Link></li> */}
           {user ? (
             <>
               <li><span className="font-semibold">{user.name}</span></li>

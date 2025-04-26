@@ -10,7 +10,7 @@ const Footer = () => {
           <li><Link to="/dashboard" className="hover:text-blue-400">Dashboard</Link></li>
           <li><Link to="/profile" className="hover:text-blue-400">Profile</Link></li>
           <li><Link to="/chats" className="hover:text-blue-400">Chat</Link></li>
-          <li><Link to="/progress" className="hover:text-blue-400">Progress</Link></li>
+          {/* <li><Link to="/progress" className="hover:text-blue-400">Progress</Link></li> */}
         </ul>
 
         {/* Copyright Text */}
