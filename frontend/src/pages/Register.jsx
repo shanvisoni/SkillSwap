@@ -27,7 +27,7 @@ const Register = () => {
   return (
     <div
       className="h-screen w-full flex items-center justify-center bg-no-repeat bg-cover bg-center"
-      style={{ backgroundImage: "url('/RegisterPage.jpg')" }}
+      style={{ backgroundImage: "url('/images/RegisterPage.jpg')" }}
     >
       <div className="backdrop-blur-md bg-black/60 rounded-2xl p-8 w-[380px] shadow-2xl">
         <h2 className="text-3xl font-bold text-white text-center mb-6">Register</h2>
