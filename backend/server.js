@@ -42,14 +42,30 @@ process.on('uncaughtException', (error) => {
   console.error('Uncaught Exception:', error);
 });
 
-// Middleware
-app.use(express.json()); // Body parser for JSON data
+
+
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "https://theskillswap.netlify.app", // Allow only this origin
-    credentials: true, // Allow cookies and authentication headers
+    origin: process.env.CLIENT_URL || "https://theskillswap.netlify.app",
+    credentials: true,
   })
 );
+
+
+
+// Handle preflight requests
+app.options("*", cors());
+
+
+// Middleware
+app.use(express.json()); // Body parser for JSON data
+// app.use(
+//   cors({
+//     origin: process.env.CLIENT_URL || "https://theskillswap.netlify.app", // Allow only this origin
+//     credentials: true, // Allow cookies and authentication headers
+//   })
+// );
 
 
 
