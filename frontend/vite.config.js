@@ -1,18 +1,18 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react()],
   build: {
     outDir: 'dist',
-    assetsDir: 'assets',       // Compiled assets will go to /dist/assets
-    emptyOutDir: true,        // Clears dist folder on rebuild
+    assetsDir: 'assets',
+    emptyOutDir: true,
     rollupOptions: {
-      input: './index.html',  // Simplified entry point
-    },
+      output: {
+        assetFileNames: 'assets/[name].[ext]' // Ensures consistent asset paths
+      }
+    }
   },
-  base: '/',                 // Changed from './' to '/' for Vercel
-  publicDir: 'public',       // Serves static files from /public
-  assetsInclude: ['**/*.jpg', '**/*.jpeg', '**/*.png', '**/*.svg'], // Explicit asset types
+  base: '/',
+  publicDir: 'public'
 });
