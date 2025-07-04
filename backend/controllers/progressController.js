@@ -1,6 +1,6 @@
 import Progress from '../models/Progress.js';
-import { sendNotification } from '../utils/sendNotification.js'; // Import this
-import { formatDate } from '../utils/formatDate.js'; // Import this
+import { sendNotification } from '../utils/sendNotification.js'; 
+import { formatDate } from '../utils/formatDate.js'; 
 
 export const updateProgress = async (req, res) => {
   try {

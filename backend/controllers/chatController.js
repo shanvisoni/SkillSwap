@@ -9,7 +9,7 @@ export const getChatHistory = async (req, res) => {
     const { userId } = req.params;
 
     if (!userId) {
-      return res.status(400).json({ message: "❌ User ID is required!" });
+      return res.status(400).json({ message: " User ID is required!" });
     }
 
     const currentUserId = req.user.id; // Get logged-in user ID

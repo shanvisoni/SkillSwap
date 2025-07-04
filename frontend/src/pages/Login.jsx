@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import { loginUser } from "../services/authService";
-
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -70,9 +69,9 @@ const Login = () => {
 
         <p className="text-sm mt-3 text-center text-gray-400">
           Don't have an account?{" "}
-          <a href="/register" className="text-cyan-400 hover:underline">
+          <Link to="/register" className="text-cyan-400 hover:underline" >
             Register
-          </a>
+          </Link>
         </p>
       </div>
     </div>

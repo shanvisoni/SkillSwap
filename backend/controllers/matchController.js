@@ -25,12 +25,6 @@ export const findMatchingUsers = async (req, res) => {
 
     const { teaching, learning } = currentUser;
 
-    // Find users whose learning skills match my teaching skills
-    // const usersLearningFromMe = await User.find({ 
-    //   learning: { $in: teaching }, 
-    //   _id: { $ne: userId } // Exclude self
-    // }).select("_id name learning");
-
 
     const usersLearningFromMe = await User.find({ 
       learning: { $in: teaching }, 
@@ -51,17 +45,6 @@ export const findMatchingUsers = async (req, res) => {
 
     
 
-
-    // const usersTeachingMe = await User.find({ 
-    //   teaching: { $in: lowerLearning.map(skill => new RegExp(`^${skill}$`, "i")) }, 
-    //   _id: { $ne: userId } 
-    // }).select("_id name teaching").lean();
-    
-    // usersTeachingMe.forEach(user => {
-    //   user.teaching = user.teaching.filter(skill => 
-    //     lowerLearning.includes(skill.toLowerCase()) // Case-insensitive matching
-    //   );
-    // });
     const usersTeachingMe = await User.find({ 
       teaching: { $in: lowerLearning.map(skill => new RegExp(`^${skill}$`, "i")) }, 
       _id: { $ne: userId } 
@@ -76,14 +59,8 @@ export const findMatchingUsers = async (req, res) => {
 
 
 
-
-    
-    console.log("Users Learning From Me:", usersLearningFromMe);
-    console.log("Users Teaching Me:", usersTeachingMe);
-
     let matchRecords = [];
 
-    // Store Matches for Teaching
     usersLearningFromMe.forEach(learner => {
       const matchedSkills = teaching.filter(skill => learner.learning?.includes(skill));
       if (matchedSkills.length > 0) {

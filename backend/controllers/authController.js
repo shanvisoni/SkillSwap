@@ -28,14 +28,12 @@ export const registerUser = async (req, res) => {
       token,
     });
   } catch (error) {
-    console.error("Registration Error:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
 export const loginUser = async (req, res) => {
   try {
-    console.log("Login Request Body:", req.body); // Debugging
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
